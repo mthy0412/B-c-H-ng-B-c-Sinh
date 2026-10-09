@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thư cảm ơn Bác Hưng và Bác Sinh</title>
+<meta name="description" content="Lá thư con viết để cảm ơn Bác Hưng và Bác Sinh đã giúp đỡ con trên con đường học tập và giúp đỡ gia đình con.">
+<meta property="og:title" content="Thư cảm ơn Bác Hưng và Bác Sinh">
+<meta property="og:description" content="Lá thư con viết để cảm ơn hai Bác.">
+<meta name="theme-color" content="#cfdcd5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --desk: #cfdcd5;
+    --paper: #fbfdff;
+    --rule: #cfe0f1;
+    --margin: #e27a84;
+    --ink: #1d3fa6;
+    --ink-soft: #3b5bbd;
+    --lh: 2.5rem;
+    --pad-left: 4.5rem;
+    --pad-right: 1.5rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --desk: #1a2321; }
+  }
+  :root[data-theme="dark"] { --desk: #1a2321; }
+
+  * { box-sizing: border-box; }
+  html { height: 100%; }
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--desk);
+    color: var(--ink);
+    font-family: "Playwrite VN", "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive;
+    font-size: 1rem;
+    line-height: var(--lh);
+    padding: 3rem 1rem 4rem;
+    padding-top: calc(3rem + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ---------- Trang thư ---------- */
+  .paper {
+    position: relative;
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: calc(var(--lh) * 2) var(--pad-right) calc(var(--lh) * 2) var(--pad-left);
+    background-color: var(--paper);
+    background-image: repeating-linear-gradient(
+      to bottom, transparent 0, transparent calc(var(--lh) - 1px),
+      var(--rule) calc(var(--lh) - 1px), var(--rule) var(--lh));
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 18px 40px -18px rgba(0,0,0,.35);
+  }
+  .paper::before, .paper::after {
+    content: "";
+    position: absolute; top: 0; bottom: 0; width: 1px;
+    background: var(--margin);
+  }
+  .paper::before { left: calc(var(--pad-left) - 1.1rem); }
+  .paper::after  { left: calc(var(--pad-left) - 1.1rem + 4px); opacity: .55; }
+
+  h1 { margin: 0; font-size: 1.55rem; font-weight: 400; line-height: calc(var(--lh) * 2); }
+  p { margin: 0 0 var(--lh); text-wrap: pretty; }
+  .date { text-align: right; color: var(--ink-soft); margin-bottom: var(--lh); }
+  .body p { text-indent: 2rem; }
+  .sign { text-align: right; margin-bottom: 0; }
+  .sign .name { display: block; font-size: 1.25rem; line-height: calc(var(--lh) * 2); }
+
+  /* Thư ẩn cho tới khi phong bì được mở */
+  body.closed .paper, body.closed footer { visibility: hidden; }
+  .reveal { opacity: 1; }
+  @media (prefers-reduced-motion: no-preference) {
+    body.opened .reveal {
+      opacity: 0;
+      animation: write 0.9s ease forwards;
+      animation-delay: calc(var(--i) * 0.45s + 0.3s);
+    }
+    @keyframes write {
+      from { opacity: 0; clip-path: inset(0 100% 0 0); }
+      to   { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
+  }
+
+  footer {
+    max-width: 44rem;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    font-size: .8rem;
+    line-height: 1.8;
+    color: color-mix(in srgb, var(--ink) 55%, var(--desk));
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) footer { color: #8fa39c; }
+  }
+  .scatter {
+    font: inherit; font-size: .85rem;
+    margin-top: .5rem;
+    padding: .35rem 1.1rem;
+    border: 1px solid #d9758a;
+    border-radius: 999px;
+    background: transparent;
+    color: #b8405a;
+    cursor: pointer;
+  }
+  .scatter:hover { background: #fdeef1; }
+  .scatter:focus-visible, .envelope:focus-visible { outline: 3px solid #1d3fa6; outline-offset: 4px; }
+
+  /* ---------- Phong bì ---------- */
+  .intro {
+    position: fixed; inset: 0; z-index: 20;
+    display: none; place-items: center;
+    background: var(--desk);
+    transition: opacity .8s ease .5s, visibility 0s linear 1.3s;
+  }
+  body.closed .intro, body.opened .intro { display: grid; }
+  body.opened .intro { opacity: 0; visibility: hidden; }
+
+  .envelope {
+    --w: min(78vw, 22rem);
+    position: relative;
+    width: var(--w); height: calc(var(--w) * .66);
+    border: 0; padding: 0; background: none;
+    font: inherit; color: inherit; cursor: pointer;
+    perspective: 900px;
+    transition: transform .9s ease .3s;
+    animation: bob 3.2s ease-in-out infinite;
+  }
+  @keyframes bob { 50% { transform: translateY(-8px); } }
+  body.opened .envelope { animation: none; transform: translateY(30px) scale(.9); }
+
+  .env-back, .env-front, .env-flap { position: absolute; inset: 0; }
+  .env-back { background: #ecc9d1; border-radius: 6px; box-shadow: 0 16px 30px -12px rgba(0,0,0,.35); }
+  .env-card {
+    position: absolute; left: 7%; right: 7%; top: 8%; bottom: 8%;
+    background: var(--paper); border-radius: 3px;
+    transition: transform .8s ease .25s;
+  }
+  body.opened .env-card { transform: translateY(-38%); }
+  .env-front {
+    background:
+      linear-gradient(to bottom right, transparent 49.5%, #f6dde2 50%) left / 50% 100% no-repeat,
+      linear-gradient(to bottom left,  transparent 49.5%, #f6dde2 50%) right / 50% 100% no-repeat,
+      linear-gradient(to top, #f9e6ea 0 55%, transparent 55%);
+    border-radius: 6px;
+    clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+  }
+  .env-flap {
+    bottom: auto; height: 56%;
+    background: #f1c2cc;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform .7s ease;
+    backface-visibility: hidden;
+    border-radius: 6px 6px 0 0;
+  }
+  body.opened .env-flap { transform: rotateX(180deg); }
+  .env-seal {
+    position: absolute; left: 50%; top: 52%;
+    width: 2.6rem; height: 2.6rem; margin: -1.3rem 0 0 -1.3rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e0607a, #b8405a);
+    box-shadow: 0 3px 6px rgba(0,0,0,.3);
+    display: grid; place-items: center;
+    font-size: 1.2rem; line-height: 1;
+    transition: opacity .3s;
+  }
+  body.opened .env-seal { opacity: 0; }
+  .env-to {
+    position: absolute; left: 0; right: 0; bottom: 9%;
+    text-align: center; font-size: .8rem; line-height: 1.4;
+    color: #8a3347;
+  }
+  .intro-hint { position: absolute; bottom: calc(12vh + env(safe-area-inset-bottom, 0px)); left: 0; right: 0; text-align: center; font-size: .9rem; color: var(--ink-soft); transition: opacity .3s; }
+  body.opened .intro-hint { opacity: 0; }
+
+  /* ---------- Cánh hoa ---------- */
+  #petals { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 30; pointer-events: none; }
+
+  @media (max-width: 36rem) {
+    :root { --lh: 2.25rem; --pad-left: 2.9rem; --pad-right: 1rem; }
+    body { font-size: .9rem; padding-left: .5rem; padding-right: .5rem; }
+    h1 { font-size: 1.3rem; }
+    .body p { text-indent: 1.25rem; }
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .paper { box-shadow: none; }
+    footer, .intro, #petals { display: none !important; }
+    body.closed .paper { visibility: visible; }
+    .reveal { animation: none !important; opacity: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <button class="envelope" type="button" aria-label="Mở lá thư">
+    <span class="env-back"></span>
+    <span class="env-card"></span>
+    <span class="env-front"></span>
+    <span class="env-flap"></span>
+    <span class="env-seal" aria-hidden="true">🌸</span>
+    <span class="env-to">Gửi Bác Hưng và Bác Sinh</span>
+  </button>
+  <p class="intro-hint">Chạm vào phong bì để mở thư</p>
+</div>
+
+<main class="paper">
+  <h1 class="reveal" style="--i:0">Gửi Bác Hưng và Bác Sinh,</h1>
+  <p class="date reveal" style="--i:1">Ngày 9 tháng 10 năm 2026</p>
+
+  <div class="body">
+    <p class="reveal" style="--i:2">
+      Hôm nay, con viết những dòng này để gửi lời cảm ơn chân thành đến hai Bác vì những
+      điều hai Bác đã dành cho con và gia đình trong suốt thời gian qua.
+    </p>
+
+    <p class="reveal" style="--i:3">
+      Trên chặng đường học tập của mình, con may mắn nhận được sự giúp đỡ và tạo điều kiện
+      từ hai Bác. Sự quan tâm ấy không chỉ giúp con có thêm điều kiện để tiếp tục theo đuổi
+      việc học mà còn giúp gia đình con vơi bớt phần nào những lo toan. Con hiểu rằng những
+      gì hai Bác dành cho con là điều rất đáng quý, và con luôn trân trọng tấm lòng ấy.
+    </p>
+
+    <p class="reveal" style="--i:4">
+      Con biết ơn vì trong những lúc gia đình còn nhiều khó khăn, hai Bác đã sẵn lòng san sẻ
+      và giúp đỡ một cách chu đáo. Đối với con, đây không chỉ là sự hỗ trợ thiết thực mà còn
+      là một ân tình mà con sẽ luôn ghi nhớ.
+    </p>
+
+    <p class="reveal" style="--i:5">
+      Con sẽ cố gắng học tập thật nghiêm túc, sống có trách nhiệm và từng bước xây dựng
+      tương lai bằng chính nỗ lực của mình, để không phụ sự tin tưởng và những điều tốt đẹp
+      hai Bác đã dành cho con. Con cũng mong rằng sau này, khi có đủ khả năng, con sẽ có thể
+      giúp đỡ những người khác như cách con đã nhận được sự giúp đỡ hôm nay.
+    </p>
+
+    <p class="reveal" style="--i:6">
+      Con kính chúc hai Bác và gia đình luôn mạnh khỏe, bình an, mọi việc thuận lợi và cuộc
+      sống luôn tràn đầy niềm vui.
+    </p>
+  </div>
+
+  <p class="sign reveal" style="--i:7">
+    Con kính thư,
+    <span class="name">Tống Mai Thy</span>
+  </p>
+</main>
+
+<footer>
+  <div>Viết bằng cả tấm lòng biết ơn.</div>
+  <button class="scatter" type="button" id="scatter">Rắc thêm cánh hoa</button>
+</footer>
+
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  var body = document.body;
+  var canvas = document.getElementById('petals');
+  var ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W = 0, H = 0, dpr = 1;
+  var petals = [];
+  var AMBIENT = window.innerWidth < 600 ? 12 : 22;
+  var MAX = 260;
+  var pointer = { x: -999, y: -999, active: false };
+  var colors = ['#f9c5d1', '#f4a6ba', '#fbd9e1', '#ee8fa8', '#fde8ee'];
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+
+  function makePetal(x, y, burst) {
+    var s = rand(8, 15);
+    return {
+      x: x, y: y, s: s,
+      rot: rand(0, 6.28), vr: rand(-0.04, 0.04),
+      vx: burst ? rand(-5, 5) : rand(-0.3, 0.3),
+      vy: burst ? rand(-7, -1) : rand(0.5, 1.3),
+      phase: rand(0, 6.28), sway: rand(0.4, 1.1),
+      flip: rand(0, 6.28),
+      color: colors[(Math.random() * colors.length) | 0],
+      alpha: burst ? 1 : rand(0.55, 0.9),
+      burst: !!burst,
+      life: burst ? rand(180, 320) : Infinity
+    };
+  }
+
+  function seedAmbient() {
+    if (reduce) return;
+    for (var i = 0; i < AMBIENT; i++) {
+      petals.push(makePetal(rand(0, W), rand(-H, H), false));
+    }
+  }
+
+  function drawPetal(p) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.scale(1, 0.35 + Math.abs(Math.cos(p.flip)) * 0.65);
+    ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha));
+    ctx.fillStyle = p.color;
+    var s = p.s;
+    ctx.beginPath();
+    ctx.moveTo(0, -s);
+    ctx.bezierCurveTo(s * 0.9, -s * 0.7, s * 0.8, s * 0.6, 0, s);
+    ctx.bezierCurveTo(-s * 0.8, s * 0.6, -s * 0.9, -s * 0.7, 0, -s);
+    ctx.fill();
+    ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha)) * 0.35;
+    ctx.strokeStyle = '#d9758a';
+    ctx.lineWidth = 0.8;
+    ctx.beginPath(); ctx.moveTo(0, -s * 0.8); ctx.lineTo(0, s * 0.8); ctx.stroke();
+    ctx.restore();
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = petals.length - 1; i >= 0; i--) {
+      var p = petals[i];
+      p.phase += 0.02; p.flip += 0.05; p.rot += p.vr;
+
+      if (p.burst) {
+        p.vy += 0.16;           // trọng lực
+        p.vx *= 0.985;
+        p.vy *= 0.99;
+        p.x += p.vx + Math.sin(p.phase) * p.sway * 0.5;
+        p.y += p.vy;
+        p.life--;
+        if (p.life < 60) p.alpha = p.life / 60;
+        if (p.life <= 0 || p.y > H + 30) { petals.splice(i, 1); continue; }
+      } else {
+        p.x += p.vx + Math.sin(p.phase) * p.sway;
+        p.y += p.vy;
+        if (pointer.active) {   // cánh hoa lảng ra khỏi con trỏ
+          var dx = p.x - pointer.x, dy = p.y - pointer.y;
+          var d2 = dx * dx + dy * dy;
+          if (d2 < 14000 && d2 > 1) {
+            var d = Math.sqrt(d2), f = (1 - d / 118) * 2.2;
+            p.x += (dx / d) * f; p.y += (dy / d) * f;
+            p.rot += 0.05;
+          }
+        }
+        if (p.y > H + 20) { p.y = -20; p.x = rand(0, W); }
+        if (p.x < -30) p.x = W + 20;
+        if (p.x > W + 30) p.x = -20;
+      }
+      drawPetal(p);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function burst(x, y, n) {
+    var room = MAX - petals.length;
+    n = Math.min(n, room);
+    for (var i = 0; i < n; i++) petals.push(makePetal(x, y, true));
+  }
+
+  // Tương tác
+  window.addEventListener('pointermove', function (e) {
+    pointer.x = e.clientX; pointer.y = e.clientY;
+    pointer.active = e.pointerType !== 'touch' || e.buttons > 0;
+  });
+  window.addEventListener('pointerleave', function () { pointer.active = false; });
+  window.addEventListener('pointerup', function (e) { if (e.pointerType === 'touch') pointer.active = false; });
+
+  window.addEventListener('pointerdown', function (e) {
+    if (e.target.closest && e.target.closest('.envelope')) return;
+    burst(e.clientX, e.clientY, 18);
+  });
+
+  document.getElementById('scatter').addEventListener('click', function (e) {
+    e.stopPropagation();
+    for (var i = 0; i < 5; i++) {
+      setTimeout(function () { burst(rand(W * 0.15, W * 0.85), rand(H * 0.1, H * 0.4), 12); }, i * 120);
+    }
+  });
+
+  // Mở phong bì
+  var envBtn = document.querySelector('.envelope');
+  body.classList.add('closed');
+  function openLetter() {
+    if (body.classList.contains('opened')) return;
+    var r = envBtn.getBoundingClientRect();
+    body.classList.add('opened');
+    burst(r.left + r.width / 2, r.top + r.height * 0.4, 46);
+    setTimeout(function () { body.classList.remove('closed'); }, 700);
+    setTimeout(function () { burst(W / 2, H * 0.25, 30); }, 1100);
+  }
+  envBtn.addEventListener('click', openLetter);
+  if (reduce) { body.classList.remove('closed'); }
+
+  seedAmbient();
+  requestAnimationFrame(step);
+})();
+</script>
+</body>
+</html>
